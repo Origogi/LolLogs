@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoLLogs" >
         <activity
-            android:name=".view.SearchResultView"
+            android:name=".view.SearchResultActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
