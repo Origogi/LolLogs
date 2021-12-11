@@ -14,7 +14,6 @@
             android:layout_marginHorizontal="16dp"
             android:backgroundTint="@color/purple_200"
             app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="소환사명을 입력하시오" />
 
