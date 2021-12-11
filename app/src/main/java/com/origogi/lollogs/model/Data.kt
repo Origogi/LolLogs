@@ -1,7 +1,9 @@
 package com.origogi.lollogs.model
 
+import java.text.DecimalFormat
+
 data class SummonerResponse(
-    var summoner: Summoner
+    var summoner: Summoner? = null
 )
 
 data class Summoner(
@@ -11,8 +13,8 @@ data class Summoner(
     var profileBorderImageUrl: String = "",
     var url: String = "",
     var leagues: List<League> = emptyList(),
-    var ladderRank : LadderRank = LadderRank(),
-    var profileBackgroundImageUrl : String = ""
+    var ladderRank: LadderRank = LadderRank(),
+    var profileBackgroundImageUrl: String = ""
 )
 
 data class League(
@@ -20,7 +22,14 @@ data class League(
     var wins: Int = 0,
     var losses: Int = 0,
     var tierRank: Tier = Tier()
-)
+) {
+
+    val winsRate: String
+        get() {
+            val rate = (wins * 100) / losses
+            return "${wins}승 ${losses}패 ($rate%)"
+        }
+}
 
 data class Tier(
     var name: String = "",
@@ -33,7 +42,16 @@ data class Tier(
     var lp: Int = 0,
     var tierRankPoint: Int = 0,
     var season: Int = 0
-)
+
+) {
+    val lpStrFormat: String
+        get() {
+            val dec = DecimalFormat("#,###")
+            val lpDecimal = dec.format(lp)
+            return "$lpDecimal LP"
+        }
+
+}
 
 data class LadderRank(
     var rank: Int = 0,
