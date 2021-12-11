@@ -26,7 +26,7 @@ data class League(
 
     val winsRate: String
         get() {
-            val rate = (wins * 100) / losses
+            val rate = (wins * 100) /  (wins + losses)
             return "${wins}승 ${losses}패 ($rate%)"
         }
 }
