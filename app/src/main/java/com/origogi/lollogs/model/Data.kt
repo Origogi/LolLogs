@@ -34,7 +34,6 @@ data class League(
 data class Tier(
     var name: String = "",
     var tier: String = "",
-    var tierDivision: String = "",
     var string: String = "",
     var shortString: String = "",
     var division: String = "",
@@ -51,6 +50,10 @@ data class Tier(
             return "$lpDecimal LP"
         }
 
+    val tierDivision : String
+        get() {
+            return "$tier ${shortString.last()}"
+        }
 }
 
 data class LadderRank(
