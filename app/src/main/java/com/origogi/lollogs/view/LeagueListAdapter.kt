@@ -8,19 +8,21 @@ import com.origogi.lollogs.R
 import com.origogi.lollogs.databinding.ListItemTierBinding
 import com.origogi.lollogs.model.League
 
-class LeagueListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+class LeagueListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var leagueItems: List<League> = emptyList()
 
-    fun updateTierItem(newItems : List<League>) {
+    fun updateTierItem(newItems: List<League>) {
         leagueItems = newItems
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = DataBindingUtil.inflate<ListItemTierBinding>(
             LayoutInflater.from(parent.context),
             R.layout.list_item_tier, parent, false
         )
-        return MyViewHolder(binding)    }
+        return MyViewHolder(binding)
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MyViewHolder).bind(leagueItems[position])

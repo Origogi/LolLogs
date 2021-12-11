@@ -6,6 +6,12 @@ data class SummonerResponse(
     var summoner: Summoner? = null
 )
 
+sealed class ListType
+
+// TODO implement  MostChampions, GameData class
+class MostChampions : ListType()
+class GameData : ListType()
+
 data class Summoner(
     var name: String = "",
     var level: Int = 0,
@@ -15,7 +21,7 @@ data class Summoner(
     var leagues: List<League> = emptyList(),
     var ladderRank: LadderRank = LadderRank(),
     var profileBackgroundImageUrl: String = ""
-)
+) : ListType()
 
 data class League(
     var hasResults: Boolean = false,

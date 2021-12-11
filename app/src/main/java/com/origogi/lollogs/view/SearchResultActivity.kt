@@ -22,21 +22,16 @@ class SearchResultActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_result)
-        binding.summoner = Summoner()
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.summoner.observe(this) {
-            if (it.summoner != null) {
-                binding.summoner = it.summoner
-            }
-        }
 
-        binding.tierListview.apply {
-            adapter = LeagueListAdapter()
+        binding.recyclerView.apply {
+            adapter = SearchResultListAdapter()
             layoutManager =
                 LinearLayoutManager(
                     this@SearchResultActivity,
-                    LinearLayoutManager.HORIZONTAL,
+                    LinearLayoutManager.VERTICAL,
                     false
                 )
         }
