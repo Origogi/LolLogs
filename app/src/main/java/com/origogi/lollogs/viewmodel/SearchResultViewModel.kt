@@ -37,7 +37,7 @@ class SearchResultViewModel : ViewModel() {
             }
 
             val summonerResponse = summonerJob.await()
-            var matchesResponse = matchesJob.await()
+            val matchesResponse = matchesJob.await()
 
             _summoner.value = summonerResponse.summoner
             _recentGameSummary.value = makeRecentGameSummaryData(matchesResponse)

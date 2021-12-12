@@ -1,20 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="data"
-            type="com.origogi.lollogs.model.ChampionSummary" />
+            type="com.origogi.lollogs.model.RecentGameSummaryData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="240dp"
-        android:layout_height="82dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/rect_grey">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="12dp">
 
+        <TextView
+            android:id="@+id/recentGameLabel"
+            style="@style/TextStyle7"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="최근 20게임 분석"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/winsLosses"
+            style="@style/TextStyle7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/recentGameLabel"
+            app:layout_constraintTop_toBottomOf="@id/recentGameLabel"
+            tools:text="11승 9패" />
 
+        <TextView
+            android:id="@+id/kill"
+            style="@style/TextStyle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintLeft_toLeftOf="@id/recentGameLabel"
+            app:layout_constraintTop_toBottomOf="@id/winsLosses"
+            tools:text="5.9" />
+
+        <TextView
+            android:id="@+id/slash0"
+            style="@style/TextStyle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            android:textColor="@color/charcoal_grey"
+            app:layout_constraintLeft_toRightOf="@id/kill"
+            app:layout_constraintTop_toTopOf="@id/kill" />
+
+        <TextView
+            android:id="@+id/death"
+            style="@style/TextStyle20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/slash0"
+            app:layout_constraintTop_toTopOf="@id/kill"
+            tools:text="5.8" />
+
+        <TextView
+            android:id="@+id/slash1"
+            style="@style/TextStyle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            android:textColor="@color/charcoal_grey"
+            app:layout_constraintLeft_toRightOf="@id/death"
+            app:layout_constraintTop_toTopOf="@id/kill" />
+
+        <TextView
+            android:id="@+id/assist"
+            style="@style/TextStyle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/slash1"
+            app:layout_constraintTop_toTopOf="@id/kill"
+            tools:text="14.1" />
+
+        <TextView
+            android:id="@+id/kda"
+            style="@style/TextStyle10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/kill"
+            tools:text="3.65:1" />
+
+        <TextView
+            android:id="@+id/winsRate"
+            style="@style/TextStyle12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/kda"
+            app:layout_constraintTop_toTopOf="@id/kda"
+            tools:text=" (66%)" />
+
+        <TextView
+            android:id="@+id/mostWinsRateLabel"
+            style="@style/TextStyle8"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:text="모스트 승률"
+            app:layout_constraintLeft_toRightOf="@id/recentGameLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/mostChampImage0"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="@id/mostWinsRateLabel"
+            app:layout_constraintTop_toBottomOf="@id/mostWinsRateLabel"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/mostChampWinRate0"
+            style="@style/TextStyle11"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/mostChampImage0"
+            app:layout_constraintTop_toBottomOf="@id/mostChampImage0"
+            tools:text="42%" />
+
+        <ImageView
+            android:id="@+id/mostChampImage1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="17dp"
+            app:layout_constraintRight_toRightOf="@id/mostWinsRateLabel"
+            app:layout_constraintTop_toBottomOf="@id/mostWinsRateLabel"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/mostChampWinRate1"
+            style="@style/TextStyle12"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/mostChampImage1"
+            app:layout_constraintTop_toBottomOf="@id/mostChampImage1"
+            tools:text="42%" />
+
+        <TextView
+            android:id="@+id/positionLabel"
+            style="@style/TextStyle8"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="포지션"
+            app:layout_constraintLeft_toRightOf="@id/mostWinsRateLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/positionImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/positionLabel"
+            app:layout_constraintRight_toRightOf="@id/positionLabel"
+            app:layout_constraintTop_toBottomOf="@id/positionLabel"
+            tools:src="@drawable/ic_icon_lol_bot" />
+
+        <TextView
+            android:id="@+id/positionWinsRate"
+            style="@style/TextStyle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            app:layout_constraintLeft_toLeftOf="@id/positionLabel"
+            app:layout_constraintRight_toRightOf="@id/positionLabel"
+            app:layout_constraintTop_toBottomOf="@id/positionImage"
+            tools:text="42%" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
