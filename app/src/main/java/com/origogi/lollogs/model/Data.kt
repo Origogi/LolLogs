@@ -15,11 +15,16 @@ data class MatchesResponse(
 )
 
 data class ChampionSummary(
+    var id: Int = 0,
+    var key: String = "",
+    var name: String = "",
+    var imageUrl: String = "",
     var games: Int = 0,
+    var kills: Int = 0,
+    var deaths: Int = 0,
+    var assists: Int = 0,
     var wins: Int = 0,
     var losses: Int = 0,
-    var position: String = "",
-    var positionName: String = ""
 )
 
 
@@ -41,45 +46,48 @@ data class Summary(
 
 sealed class ListType
 
-// TODO implement  MostChampions, GameData class
-class RecentGameSummaryData : ListType()
+data class RecentGameSummaryData(
+    val mostChampions: List<ChampionSummary>,
+    val summary: Summary,
+    val position: Position
+) : ListType()
 
 data class GameData(
     var mmr: Int = 0,
     var champion: Champion,
     var spells: List<Spell>,
-    var items : List<Item>,
-    var needRenew : Boolean = false,
-    var gameId : String = "",
-    var createDate : Long = 0L,
-    var gameLength : Long = 0L,
+    var items: List<Item>,
+    var needRenew: Boolean = false,
+    var gameId: String = "",
+    var createDate: Long = 0L,
+    var gameLength: Long = 0L,
     var gameType: String = "",
-    var summonerId : String = "",
-    var summonerName : String = "",
-    var tierRankShort : String = "",
-    var stats : Stats = Stats(),
-    var peak : List<String> = emptyList(),
-    var isWin : Boolean = false
+    var summonerId: String = "",
+    var summonerName: String = "",
+    var tierRankShort: String = "",
+    var stats: Stats = Stats(),
+    var peak: List<String> = emptyList(),
+    var isWin: Boolean = false
 
 ) : ListType()
 
 data class Stats(
-    var general : General = General(),
+    var general: General = General(),
 //    var ward : Ward = Ward(),
 )
 
 data class General(
-    var kill : Int = 0,
+    var kill: Int = 0,
     var death: Int = 0,
     var assists: Int = 0,
-    var kdaString : String = "",
-    var cs : Int = 0,
-    var csPerMin : Double = 0.0,
-    var contributionForKillRate : String = "",
-    var goldEarned : Int = 0,
-    var totalDamageDealtToChampions : Int = 0,
-    var largestMultiKillString : String =  "",
-    var opScoreBadge : String = ""
+    var kdaString: String = "",
+    var cs: Int = 0,
+    var csPerMin: Double = 0.0,
+    var contributionForKillRate: String = "",
+    var goldEarned: Int = 0,
+    var totalDamageDealtToChampions: Int = 0,
+    var largestMultiKillString: String = "",
+    var opScoreBadge: String = ""
 )
 
 data class Champion(

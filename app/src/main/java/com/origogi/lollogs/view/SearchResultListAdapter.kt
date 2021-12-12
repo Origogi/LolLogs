@@ -1,11 +1,13 @@
 package com.origogi.lollogs.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.origogi.lollogs.R
+import com.origogi.lollogs.TAG
 import com.origogi.lollogs.databinding.ListItemSummonerBinding
 import com.origogi.lollogs.model.*
 import java.lang.Exception
@@ -19,7 +21,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     private var summoner : Summoner? = null
-    private var championSummary : RecentGameSummaryData? = null
+    private var summary : RecentGameSummaryData? = null
     private var gameDataList : List<GameData> = emptyList()
 
     private var listItems : List<out ListType> = emptyList()
@@ -30,10 +32,15 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         updateList()
     }
 
+    fun updateSummary(summary: RecentGameSummaryData) {
+
+        Log.d(TAG, summary.toString())
+    }
+
     private fun updateList() {
         listItems = mutableListOf<ListType>().apply {
             summoner?.let { add(it) }
-            championSummary?.let { add(it) }
+            summary?.let { add(it) }
             gameDataList?.let {
                 addAll(it)
             }

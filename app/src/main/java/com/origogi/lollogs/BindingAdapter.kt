@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.origogi.lollogs.model.League
+import com.origogi.lollogs.model.RecentGameSummaryData
 import com.origogi.lollogs.model.Summoner
 import com.origogi.lollogs.model.SummonerResponse
 import com.origogi.lollogs.view.LeagueListAdapter
@@ -46,6 +47,17 @@ fun bindSummoner(recyclerView: RecyclerView, summoner: LiveData<Summoner>) {
         }
     }
 }
+
+@BindingAdapter("bindSummary")
+fun bindSummary(recyclerView: RecyclerView, summary: LiveData<RecentGameSummaryData>) {
+    val adapter = recyclerView.adapter
+    if (adapter is SearchResultListAdapter) {
+        summary.value?.let {
+            adapter.updateSummary(it)
+        }
+    }
+}
+
 
 
 
