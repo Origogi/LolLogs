@@ -13,6 +13,11 @@ interface OPGGApi {
     suspend fun getSummoner(
         @Path("summoner") name: String,
     ): SummonerResponse
+
+    @GET("summoner/{summoner}/matches")
+    suspend fun getMatches(
+        @Path("summoner") name: String,
+    ): MatchesResponse
 }
 
 

@@ -19,7 +19,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     private var summoner : Summoner? = null
-    private var mostChampions : MostChampions? = null
+    private var championSummary : RecentGameSummaryData? = null
     private var gameDataList : List<GameData> = emptyList()
 
     private var listItems : List<out ListType> = emptyList()
@@ -33,7 +33,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     private fun updateList() {
         listItems = mutableListOf<ListType>().apply {
             summoner?.let { add(it) }
-            mostChampions?.let { add(it) }
+            championSummary?.let { add(it) }
             gameDataList?.let {
                 addAll(it)
             }
@@ -44,7 +44,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun getItemViewType(position: Int): Int {
         return when (listItems[position]) {
             is Summoner -> SUMMONER
-            is MostChampions -> MOST_CHAMPION
+            is RecentGameSummaryData -> MOST_CHAMPION
             else -> GAME_DATA
         }
     }

@@ -9,6 +9,7 @@ import com.origogi.lollogs.TAG
 import com.origogi.lollogs.model.RetrofitService
 import com.origogi.lollogs.model.Summoner
 import com.origogi.lollogs.model.SummonerResponse
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
@@ -25,10 +26,21 @@ class SearchResultViewModel : ViewModel() {
     fun searchData(name : String) {
 
         viewModelScope.launch {
-            val response = RetrofitService.opggApi.getSummoner(name)
-            Log.d(TAG, response.toString())
 
-            _summoner.value = response
+            val summonerJob = async {
+                RetrofitService.opggApi.getSummoner(name)
+            }
+
+            val matchesJob = async {
+                RetrofitService.opggApi.getMatches(name)
+            }
+
+            val summonerResponse = summonerJob.await()
+            var matchesResponse = matchesJob.await()
+
+            Log.d(TAG, matchesResponse.toString())
+
+            _summoner.value = summonerResponse
         }
     }
 }
