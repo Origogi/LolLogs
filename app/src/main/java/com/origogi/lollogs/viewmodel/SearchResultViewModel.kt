@@ -24,6 +24,12 @@ class SearchResultViewModel : ViewModel() {
     val recentGameSummary: LiveData<RecentGameSummaryData>
         get() = _recentGameSummary
 
+    private val _gameList : MutableLiveData<List<GameData>> = MutableLiveData<List<GameData>>().apply {
+        emptyList<GameData>()
+    }
+    val gameList : LiveData<List<GameData>>
+        get() = _gameList
+
 
     fun searchData(name: String) {
 
@@ -41,6 +47,7 @@ class SearchResultViewModel : ViewModel() {
             val matchesResponse = matchesJob.await()
 
             _summoner.value = summonerResponse.summoner
+            _gameList.value = matchesResponse.games
             _recentGameSummary.value = makeRecentGameSummaryData(matchesResponse)
         }
     }

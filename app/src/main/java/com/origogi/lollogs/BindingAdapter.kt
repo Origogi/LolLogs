@@ -66,6 +66,16 @@ fun bindSummary(recyclerView: RecyclerView, summary: LiveData<RecentGameSummaryD
     }
 }
 
+@BindingAdapter("bindGameList")
+fun bindGameList(recyclerView: RecyclerView, gameList: LiveData<List<GameData>>) {
+    val adapter = recyclerView.adapter
+    if (adapter is SearchResultListAdapter) {
+        gameList.value?.let {
+            adapter.updateGameList(it)
+        }
+    }
+}
+
 @BindingAdapter("bindMostChampions")
 fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions : List<ChampionSummary>) {
     mostChampionsView.updateView(mostChampions)

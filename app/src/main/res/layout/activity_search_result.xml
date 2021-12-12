@@ -18,6 +18,7 @@
         <androidx.recyclerview.widget.RecyclerView
             bindSummoner="@{viewmodel.summoner}"
             bindSummary="@{viewmodel.recentGameSummary}"
+            bindGameList="@{viewmodel.gameList}"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
