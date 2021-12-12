@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.origogi.lollogs.R
 import com.origogi.lollogs.TAG
+import com.origogi.lollogs.databinding.ListItemSummaryBinding
 import com.origogi.lollogs.databinding.ListItemSummonerBinding
 import com.origogi.lollogs.model.*
 import java.lang.Exception
@@ -16,7 +17,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     companion object {
         const val SUMMONER = 0
-        const val MOST_CHAMPION = 1
+        const val SUMMARY = 1
         const val GAME_DATA = 2
     }
 
@@ -33,8 +34,10 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     fun updateSummary(summary: RecentGameSummaryData) {
+        Log.d(TAG, summary.summary.toString())
+        this.summary = summary
 
-        Log.d(TAG, summary.toString())
+        updateList()
     }
 
     private fun updateList() {
@@ -51,7 +54,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun getItemViewType(position: Int): Int {
         return when (listItems[position]) {
             is Summoner -> SUMMONER
-            is RecentGameSummaryData -> MOST_CHAMPION
+            is RecentGameSummaryData -> SUMMARY
             else -> GAME_DATA
         }
     }
@@ -69,6 +72,13 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 }
                 SummonerViewHolder(binding)
 
+            }
+            SUMMARY -> {
+                val binding = DataBindingUtil.inflate<ListItemSummaryBinding>(
+                    LayoutInflater.from(parent.context),
+                    R.layout.list_item_summary, parent, false
+                )
+                SummaryViewHolder(binding)
             }
             else -> {
                 throw Exception("Not implement yet.")
@@ -93,6 +103,15 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
         override fun bind(data : ListType) {
             binding.summoner = data as Summoner
+            binding.executePendingBindings()
+        }
+    }
+
+    private class SummaryViewHolder(private val binding: ListItemSummaryBinding) :
+        RecyclerView.ViewHolder(binding.root), Binder {
+
+        override fun bind(data : ListType) {
+            binding.data = data as RecentGameSummaryData
             binding.executePendingBindings()
         }
     }

@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/tierImage"
-            loadTierImage="@{league.tierRank.imageUrl}"
+            loadImage="@{league.tierRank.imageUrl}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="12dp"

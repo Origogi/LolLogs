@@ -26,7 +26,7 @@
 
             <ImageView
                 android:id="@+id/profileImage"
-                loadProfileImage="@{summoner.profileImageUrl}"
+                loadImageCircleCrop="@{summoner.profileImageUrl}"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 app:layout_constraintLeft_toLeftOf="parent"

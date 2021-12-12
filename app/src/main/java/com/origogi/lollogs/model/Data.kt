@@ -1,5 +1,6 @@
 package com.origogi.lollogs.model
 
+import com.origogi.lollogs.winsRate
 import java.text.DecimalFormat
 
 data class SummonerResponse(
@@ -25,7 +26,10 @@ data class ChampionSummary(
     var assists: Int = 0,
     var wins: Int = 0,
     var losses: Int = 0,
-)
+) {
+    val winsRateString: String
+        get() = "${(wins to losses).winsRate}%"
+}
 
 
 data class Position(
@@ -34,15 +38,36 @@ data class Position(
     var losses: Int = 0,
     var position: String = "",
     var positionName: String = ""
-)
+) {
+    val winsRateString: String
+        get() = "${(wins to losses).winsRate}%"
+}
 
 data class Summary(
     var wins: Int = 0,
     var losses: Int = 0,
-    var killes: Int = 0,
+    var kills: Int = 0,
     var deaths: Int = 0,
     var assists: Int = 0,
-)
+
+
+    ) {
+    val avgKillString: String
+        get() = String.format("%.1f", kills / 20.0)
+    val avgDeathString: String
+        get() = String.format("%.1f", deaths / 20.0)
+    val avgAssistString: String
+        get() = String.format("%.1f", assists / 20.0)
+
+    val kdaString : String
+        get() =String.format("%.1f", (kills + assists) / Math.max(1, deaths).toDouble())
+
+    val winAndLossString: String
+        get() = "${wins}승 ${losses}패"
+
+    val winsRateString: String
+        get() = "${(wins to losses).winsRate}%"
+}
 
 sealed class ListType
 
@@ -50,7 +75,9 @@ data class RecentGameSummaryData(
     val mostChampions: List<ChampionSummary>,
     val summary: Summary,
     val position: Position
-) : ListType()
+) : ListType() {
+
+}
 
 data class GameData(
     var mmr: Int = 0,

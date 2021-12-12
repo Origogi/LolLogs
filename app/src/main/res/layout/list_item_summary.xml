@@ -12,9 +12,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@color/white"
         android:paddingLeft="16dp"
-        android:paddingTop="8dp"
+        android:paddingTop="12dp"
         android:paddingBottom="12dp">
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="@{data.summary.winAndLossString}"
             app:layout_constraintLeft_toLeftOf="@id/recentGameLabel"
             app:layout_constraintTop_toBottomOf="@id/recentGameLabel"
             tools:text="11승 9패" />
@@ -42,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:text="@{data.summary.avgKillString}"
             app:layout_constraintLeft_toLeftOf="@id/recentGameLabel"
             app:layout_constraintTop_toBottomOf="@id/winsLosses"
             tools:text="5.9" />
@@ -58,9 +61,11 @@
 
         <TextView
             android:id="@+id/death"
+
             style="@style/TextStyle20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{data.summary.avgDeathString}"
             app:layout_constraintLeft_toRightOf="@id/slash0"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="5.8" />
@@ -80,6 +85,7 @@
             style="@style/TextStyle9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{data.summary.avgAssistString}"
             app:layout_constraintLeft_toRightOf="@id/slash1"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="14.1" />
@@ -90,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:text="@{data.summary.kdaString}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/kill"
             tools:text="3.65:1" />
@@ -99,9 +106,10 @@
             style="@style/TextStyle12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{` (` + data.summary.winsRateString + `)`}"
             app:layout_constraintLeft_toRightOf="@id/kda"
             app:layout_constraintTop_toTopOf="@id/kda"
-            tools:text=" (66%)" />
+            tools:text=" (60%)" />
 
         <TextView
             android:id="@+id/mostWinsRateLabel"
@@ -115,6 +123,7 @@
 
         <ImageView
             android:id="@+id/mostChampImage0"
+            loadImageCircleCrop="@{data.mostChampions.get(0).imageUrl}"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="17dp"
@@ -129,12 +138,14 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:text="@{data.mostChampions.get(0).winsRateString}"
             app:layout_constraintLeft_toLeftOf="@id/mostChampImage0"
             app:layout_constraintTop_toBottomOf="@id/mostChampImage0"
             tools:text="42%" />
 
         <ImageView
             android:id="@+id/mostChampImage1"
+            loadImageCircleCrop="@{data.mostChampions.get(1).imageUrl}"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="8dp"
@@ -145,10 +156,11 @@
 
         <TextView
             android:id="@+id/mostChampWinRate1"
-            style="@style/TextStyle12"
+            style="@style/TextStyle11"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:text="@{data.mostChampions.get(1).winsRateString}"
             app:layout_constraintLeft_toLeftOf="@id/mostChampImage1"
             app:layout_constraintTop_toBottomOf="@id/mostChampImage1"
             tools:text="42%" />
@@ -164,6 +176,7 @@
 
         <ImageView
             android:id="@+id/positionImage"
+            loadPositionImage="@{data.position.position}"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
@@ -178,6 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
+            android:text="@{data.position.winsRateString}"
             app:layout_constraintLeft_toLeftOf="@id/positionLabel"
             app:layout_constraintRight_toRightOf="@id/positionLabel"
             app:layout_constraintTop_toBottomOf="@id/positionImage"

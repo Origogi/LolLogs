@@ -6,15 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.origogi.lollogs.model.League
-import com.origogi.lollogs.model.RecentGameSummaryData
-import com.origogi.lollogs.model.Summoner
-import com.origogi.lollogs.model.SummonerResponse
+import com.origogi.lollogs.model.*
 import com.origogi.lollogs.view.LeagueListAdapter
 import com.origogi.lollogs.view.SearchResultListAdapter
 
-@BindingAdapter("loadProfileImage")
-fun loadProfileImage(imageView: ImageView, imageUrl: String) {
+@BindingAdapter("loadImageCircleCrop")
+fun loadImageCircleCrop(imageView: ImageView, imageUrl: String) {
     Glide.with(imageView.context)
         .load(imageUrl)
         .circleCrop()
@@ -22,8 +19,16 @@ fun loadProfileImage(imageView: ImageView, imageUrl: String) {
         .into(imageView)
 }
 
-@BindingAdapter("loadTierImage")
-fun loadTierImage(imageView: ImageView, imageUrl: String) {
+@BindingAdapter("loadPositionImage")
+fun loadPositionImage(imageView: ImageView, position: String) {
+    Glide.with(imageView.context)
+        .load(positionImageMap[position])
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(imageView)
+}
+
+@BindingAdapter("loadImage")
+fun loadImage(imageView: ImageView, imageUrl: String) {
     Glide.with(imageView.context)
         .load(imageUrl)
         .transition(DrawableTransitionOptions.withCrossFade())
