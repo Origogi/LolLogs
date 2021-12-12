@@ -7,11 +7,19 @@
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/oval_black.xml" value="0.2171875" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/oval_blue.xml" value="0.2171875" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/oval_grey.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/oval_grey_2.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/rect__stroke_grey.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/rect_grey.xml" value="0.20277777777777778" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/rect_periwinkle.xml" value="0.20277777777777778" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/rect_stroke_red.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/drawable/rect_yellow.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/activity_main.xml" value="0.12777777777777777" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/activity_search_result.xml" value="0.1" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/activity_search_result_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/custom_item_list.xml" value="0.9" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/custom_most_champions.xml" value="0.5" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/layout_my_profile.xml" value="0.5" />
+        <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/list_item_match.xml" value="0.33" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/list_item_profile.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/list_item_summary.xml" value="0.67" />
         <entry key="..\:/Users/rlawj/Desktop/lollogs/app/src/main/res/layout/list_item_summoner.xml" value="0.2015625" />

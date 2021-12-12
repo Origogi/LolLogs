@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item0"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:id="@+id/item1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:id="@+id/item2"
+
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:id="@+id/item3"
+
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:id="@+id/item4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:id="@+id/item5"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/rect_grey" />
+
+    <ImageView
+        android:layout_marginLeft="2dp"
+        android:id="@+id/trinket"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/oval_grey_2" />
+
+</LinearLayout>

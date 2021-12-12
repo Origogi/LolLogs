@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="game"
+            type="com.origogi.lollogs.model.GameData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:paddingRight="16dp"
+        tools:context=".view.SearchResultActivity">
+
+        <FrameLayout
+            android:id="@+id/winLossPanel"
+            android:layout_width="40dp"
+            android:layout_height="104dp"
+            android:background="@color/soft_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="16dp"
+            android:layout_height="1dp"
+            android:background="@color/white_40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/winLossPanel"
+            app:layout_constraintRight_toRightOf="@id/winLossPanel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/winOrRose"
+            style="@style/TextStyle13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toTopOf="@id/divider"
+            app:layout_constraintLeft_toLeftOf="@id/winLossPanel"
+            app:layout_constraintRight_toRightOf="@id/winLossPanel"
+            tools:text="승" />
+
+        <TextView
+            android:id="@+id/gameDate"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintLeft_toLeftOf="@id/winLossPanel"
+            app:layout_constraintRight_toRightOf="@id/winLossPanel"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:text="38:45" />
+
+
+        <ImageView
+            android:id="@+id/championImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toRightOf="@id/winLossPanel"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            style="@style/TextStyle14"
+            android:layout_width="27dp"
+            android:layout_height="16dp"
+            android:background="@drawable/rect_periwinkle"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/championImage"
+            app:layout_constraintLeft_toLeftOf="@id/championImage"
+            app:layout_constraintRight_toRightOf="@id/championImage"
+            app:layout_constraintTop_toBottomOf="@id/championImage"
+            tools:text="MVP" />
+
+        <ImageView
+            android:id="@+id/spell0"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="4dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toRightOf="@id/championImage"
+            app:layout_constraintTop_toTopOf="@id/championImage" />
+
+        <ImageView
+            android:id="@+id/spell1"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toRightOf="@id/championImage"
+            app:layout_constraintTop_toBottomOf="@id/spell0" />
+
+        <ImageView
+            android:id="@+id/rune0"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="4dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toRightOf="@id/spell0"
+            app:layout_constraintTop_toTopOf="@id/spell0" />
+
+        <ImageView
+            android:id="@+id/rune1"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toRightOf="@id/spell0"
+            app:layout_constraintTop_toBottomOf="@id/rune0" />
+
+        <com.origogi.lollogs.view.customviews.ItemListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="@id/championImage"
+            app:layout_constraintTop_toBottomOf="@id/championImage" />
+
+        <TextView
+            android:id="@+id/kill"
+            style="@style/TextStyle15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toRightOf="@id/rune0"
+            app:layout_constraintTop_toTopOf="@id/championImage"
+            tools:text="5" />
+
+        <TextView
+
+            android:id="@+id/slash0"
+            style="@style/TextStyle15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            android:textColor="@color/charcoal_grey"
+            app:layout_constraintLeft_toRightOf="@id/kill"
+            app:layout_constraintTop_toTopOf="@id/kill" />
+
+        <TextView
+            android:id="@+id/death"
+
+            style="@style/TextStyle21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/slash0"
+            app:layout_constraintTop_toTopOf="@id/kill"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/slash1"
+            style="@style/TextStyle15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            android:textColor="@color/charcoal_grey"
+            app:layout_constraintLeft_toRightOf="@id/death"
+            app:layout_constraintTop_toTopOf="@id/kill" />
+
+        <TextView
+            android:id="@+id/assist"
+            style="@style/TextStyle15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/slash1"
+            app:layout_constraintTop_toTopOf="@id/kill"
+            tools:text="14" />
+
+        <TextView
+            android:id="@+id/gameType"
+            style="@style/TextStyle17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/championImage"
+            tools:text="솔랭" />
+
+        <TextView
+            android:id="@+id/beforeTime"
+            style="@style/TextStyle18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gameType"
+            tools:text="2분 전" />
+
+        <TextView
+            style="@style/TextStyle19"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rect_stroke_red"
+            android:gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/beforeTime"
+            tools:text="Quadra Kill"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
