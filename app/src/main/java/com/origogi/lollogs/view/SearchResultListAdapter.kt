@@ -22,33 +22,11 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         const val GAME_DATA = 2
     }
 
-    private var summoner: Summoner? = null
-    private var summary: RecentGameSummaryData? = null
-    private var gameDataList: List<GameData> = emptyList()
 
-    private var listItems: List<out ListType> = emptyList()
+    private var listItems: List< ListType> = emptyList()
 
-    fun updateSummoner(summoner: Summoner) {
-        this.summoner = summoner
-
-        updateList()
-    }
-
-    fun updateSummary(summary: RecentGameSummaryData) {
-        Log.d(TAG, summary.summary.toString())
-        this.summary = summary
-
-        updateList()
-    }
-
-    private fun updateList() {
-        listItems = mutableListOf<ListType>().apply {
-            summoner?.let { add(it) }
-            summary?.let { add(it) }
-            gameDataList?.let {
-                addAll(it)
-            }
-        }
+    fun update(items: List<ListType>) {
+        this.listItems = items
         notifyDataSetChanged()
     }
 
@@ -100,10 +78,6 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         return listItems.size
     }
 
-    fun updateGameList(gameList : List<GameData>) {
-        this.gameDataList = gameList
-        updateList()
-    }
 
     private interface Binder {
         fun bind(data: ListType)

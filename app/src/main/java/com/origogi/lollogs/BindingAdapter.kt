@@ -38,43 +38,24 @@ fun loadImage(imageView: ImageView, imageUrl: String) {
         .into(imageView)
 }
 
-@BindingAdapter("bindItem")
-fun bindItem(recyclerView: RecyclerView, items: List<League>) {
+@BindingAdapter("bindLeague")
+fun bindLeague(recyclerView: RecyclerView, items: List<League>) {
     val adapter = recyclerView.adapter
     if (adapter is LeagueListAdapter) {
         adapter.updateTierItem(items)
     }
 }
 
-@BindingAdapter("bindSummoner")
-fun bindSummoner(recyclerView: RecyclerView, summoner: LiveData<Summoner>) {
+@BindingAdapter("bindItem")
+fun bindSummoner(recyclerView: RecyclerView, items: LiveData<List<ListType>>) {
     val adapter = recyclerView.adapter
     if (adapter is SearchResultListAdapter) {
-        summoner.value?.let {
-            adapter.updateSummoner(it)
+        items.value?.let {
+            adapter.update(it)
         }
     }
 }
 
-@BindingAdapter("bindSummary")
-fun bindSummary(recyclerView: RecyclerView, summary: LiveData<RecentGameSummaryData>) {
-    val adapter = recyclerView.adapter
-    if (adapter is SearchResultListAdapter) {
-        summary.value?.let {
-            adapter.updateSummary(it)
-        }
-    }
-}
-
-@BindingAdapter("bindGameList")
-fun bindGameList(recyclerView: RecyclerView, gameList: LiveData<List<GameData>>) {
-    val adapter = recyclerView.adapter
-    if (adapter is SearchResultListAdapter) {
-        gameList.value?.let {
-            adapter.updateGameList(it)
-        }
-    }
-}
 
 @BindingAdapter("bindMostChampions")
 fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions : List<ChampionSummary>) {

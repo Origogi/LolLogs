@@ -79,7 +79,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:paddingLeft="16dp"
             android:clipToPadding="false"
-            bindItem="@{summoner.leagues}"
+            bindLeague="@{summoner.leagues}"
             android:id="@+id/tierListview"
             android:layout_marginTop="31dp"
             app:layout_constraintTop_toBottomOf="@id/profileLayout"

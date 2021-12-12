@@ -1,11 +1,9 @@
 package com.origogi.lollogs.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.origogi.lollogs.TAG
 import com.origogi.lollogs.model.*
 import com.origogi.lollogs.winsRate
 import kotlinx.coroutines.async
@@ -13,22 +11,12 @@ import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
 
-    private val _summoner: MutableLiveData<Summoner> = MutableLiveData<Summoner>().apply {
-        Summoner()
-    }
-
-    val summoner: LiveData<Summoner>
-        get() = _summoner
-
-    private val _recentGameSummary: MutableLiveData<RecentGameSummaryData> = MutableLiveData()
-    val recentGameSummary: LiveData<RecentGameSummaryData>
-        get() = _recentGameSummary
-
-    private val _gameList : MutableLiveData<List<GameData>> = MutableLiveData<List<GameData>>().apply {
-        emptyList<GameData>()
-    }
-    val gameList : LiveData<List<GameData>>
-        get() = _gameList
+    private val _listItems: MutableLiveData<List<ListType>> =
+        MutableLiveData<List<ListType>>().apply {
+            emptyList<ListType>()
+        }
+    val listItems: LiveData<List<ListType>>
+        get() = _listItems
 
 
     fun searchData(name: String) {
@@ -46,9 +34,11 @@ class SearchResultViewModel : ViewModel() {
             val summonerResponse = summonerJob.await()
             val matchesResponse = matchesJob.await()
 
-            _summoner.value = summonerResponse.summoner
-            _gameList.value = matchesResponse.games
-            _recentGameSummary.value = makeRecentGameSummaryData(matchesResponse)
+            _listItems.value = mutableListOf<ListType>().apply {
+                summonerResponse.summoner?.let { add(it) }
+                add(makeRecentGameSummaryData(matchesResponse))
+                addAll(matchesResponse.games)
+            }
         }
     }
 
