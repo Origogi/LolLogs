@@ -14,12 +14,12 @@ import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
 
-    private val _summoner : MutableLiveData<SummonerResponse> = MutableLiveData<SummonerResponse>().apply {
-        SummonerResponse()
+    private val _summoner : MutableLiveData<Summoner> = MutableLiveData<Summoner>().apply {
+        Summoner()
     }
 
 
-    val summoner : LiveData<SummonerResponse>
+    val summoner : LiveData<Summoner>
         get() = _summoner
 
 
@@ -40,7 +40,7 @@ class SearchResultViewModel : ViewModel() {
 
             Log.d(TAG, matchesResponse.toString())
 
-            _summoner.value = summonerResponse
+            _summoner.value = summonerResponse.summoner
         }
     }
 }
