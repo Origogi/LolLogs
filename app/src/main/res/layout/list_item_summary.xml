@@ -121,49 +121,14 @@
             app:layout_constraintLeft_toRightOf="@id/recentGameLabel"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/mostChampImage0"
-            loadImageCircleCrop="@{data.mostChampions.get(0).imageUrl}"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="17dp"
+        <com.origogi.lollogs.view.customviews.MostChampionsView
+            bindMostChampions="@{data.mostChampions}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintLeft_toLeftOf="@id/mostWinsRateLabel"
-            app:layout_constraintTop_toBottomOf="@id/mostWinsRateLabel"
-            tools:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/mostChampWinRate0"
-            style="@style/TextStyle11"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@{data.mostChampions.get(0).winsRateString}"
-            app:layout_constraintLeft_toLeftOf="@id/mostChampImage0"
-            app:layout_constraintTop_toBottomOf="@id/mostChampImage0"
-            tools:text="42%" />
-
-        <ImageView
-            android:id="@+id/mostChampImage1"
-            loadImageCircleCrop="@{data.mostChampions.get(1).imageUrl}"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="17dp"
             app:layout_constraintRight_toRightOf="@id/mostWinsRateLabel"
-            app:layout_constraintTop_toBottomOf="@id/mostWinsRateLabel"
-            tools:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/mostChampWinRate1"
-            style="@style/TextStyle11"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@{data.mostChampions.get(1).winsRateString}"
-            app:layout_constraintLeft_toLeftOf="@id/mostChampImage1"
-            app:layout_constraintTop_toBottomOf="@id/mostChampImage1"
-            tools:text="42%" />
+            app:layout_constraintTop_toBottomOf="@id/mostWinsRateLabel" />
 
         <TextView
             android:id="@+id/positionLabel"
@@ -191,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
-            android:text="@{data.position.winsRateString}"
+            setTextPercent="@{data.position.winsRateString}"
             app:layout_constraintLeft_toLeftOf="@id/positionLabel"
             app:layout_constraintRight_toRightOf="@id/positionLabel"
             app:layout_constraintTop_toBottomOf="@id/positionImage"

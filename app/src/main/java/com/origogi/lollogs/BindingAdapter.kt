@@ -1,6 +1,8 @@
 package com.origogi.lollogs
 
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.origogi.lollogs.model.*
 import com.origogi.lollogs.view.LeagueListAdapter
 import com.origogi.lollogs.view.SearchResultListAdapter
+import com.origogi.lollogs.view.customviews.MostChampionsView
 
 @BindingAdapter("loadImageCircleCrop")
 fun loadImageCircleCrop(imageView: ImageView, imageUrl: String) {
@@ -62,6 +65,20 @@ fun bindSummary(recyclerView: RecyclerView, summary: LiveData<RecentGameSummaryD
         }
     }
 }
+
+@BindingAdapter("bindMostChampions")
+fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions : List<ChampionSummary>) {
+    mostChampionsView.updateView(mostChampions)
+}
+
+@BindingAdapter("setTextPercent")
+fun setTextPercent(textView: TextView, value : String) {
+    if (value.startsWith("100")) {
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.darkish_pink))
+    }
+    textView.text = value
+}
+
 
 
 
