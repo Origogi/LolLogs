@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="game"
             type="com.origogi.lollogs.model.GameData" />
@@ -18,12 +20,13 @@
 
         <FrameLayout
             android:id="@+id/winLossPanel"
+            setWinOrLoseColor="@{game.win}"
             android:layout_width="40dp"
             android:layout_height="104dp"
-            android:background="@color/soft_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/soft_blue" />
 
         <View
             android:id="@+id/divider"
@@ -41,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
+            android:text="@{game.win ? `승` : `패`}"
             app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintLeft_toLeftOf="@id/winLossPanel"
             app:layout_constraintRight_toRightOf="@id/winLossPanel"
@@ -60,6 +64,7 @@
 
         <ImageView
             android:id="@+id/championImage"
+            loadImageCircleCrop="@{game.champion.imageUrl}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
@@ -82,15 +87,17 @@
 
         <ImageView
             android:id="@+id/spell0"
+            loadImageRoundCorner="@{game.spells.get(0).imageUrl}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
-            android:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toRightOf="@id/championImage"
-            app:layout_constraintTop_toTopOf="@id/championImage" />
+            app:layout_constraintTop_toTopOf="@id/championImage"
+            tools:src="@mipmap/ic_launcher" />
 
         <ImageView
             android:id="@+id/spell1"
+            loadImageRoundCorner="@{game.spells.get(1).imageUrl}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -101,6 +108,7 @@
 
         <ImageView
             android:id="@+id/rune0"
+            loadImageCircleCrop="@{game.peak.get(0)}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -110,6 +118,7 @@
 
         <ImageView
             android:id="@+id/rune1"
+            loadImageCircleCrop="@{game.peak.get(1)}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -122,6 +131,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            loadItemImages="@{game.items}"
+
             app:layout_constraintLeft_toLeftOf="@id/championImage"
             app:layout_constraintTop_toBottomOf="@id/championImage" />
 
@@ -203,7 +214,7 @@
             android:gravity="center"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/beforeTime"
-            tools:text="Quadra Kill"/>
+            tools:text="Quadra Kill" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

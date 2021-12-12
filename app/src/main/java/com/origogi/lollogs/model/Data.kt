@@ -82,8 +82,8 @@ data class RecentGameSummaryData(
 data class GameData(
     var mmr: Int = 0,
     var champion: Champion,
-    var spells: List<Spell>,
-    var items: List<Item>,
+    var spells: List<Spell> = emptyList(),
+    var items: List<Item> = emptyList(),
     var needRenew: Boolean = false,
     var gameId: String = "",
     var createDate: Long = 0L,

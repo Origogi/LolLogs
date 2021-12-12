@@ -1,5 +1,6 @@
 package com.origogi.lollogs
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -7,10 +8,12 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.origogi.lollogs.model.*
 import com.origogi.lollogs.view.LeagueListAdapter
 import com.origogi.lollogs.view.SearchResultListAdapter
+import com.origogi.lollogs.view.customviews.ItemListView
 import com.origogi.lollogs.view.customviews.MostChampionsView
 
 @BindingAdapter("loadImageCircleCrop")
@@ -29,6 +32,21 @@ fun loadPositionImage(imageView: ImageView, position: String) {
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(imageView)
 }
+
+@BindingAdapter("loadItemImages")
+fun loadItemImages(itemListView: ItemListView, items : List<Item>) {
+    itemListView.update(items)
+}
+
+@BindingAdapter("loadImageRoundCorner")
+fun loadImageRoundCorner(imageView: ImageView, imageUrl: String) {
+    Glide.with(imageView.context)
+        .load(imageUrl)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .transform( RoundedCorners(dpToPixel4))
+        .into(imageView)
+}
+
 
 @BindingAdapter("loadImage")
 fun loadImage(imageView: ImageView, imageUrl: String) {
@@ -56,6 +74,11 @@ fun bindSummoner(recyclerView: RecyclerView, items: LiveData<List<ListType>>) {
     }
 }
 
+
+@BindingAdapter("setWinOrLoseColor")
+fun setWinOrLoseColor(view: View, win : Boolean) {
+    view.setBackgroundColor(ContextCompat.getColor(view.context, if (win) R.color.soft_blue else R.color.darkish_pink ))
+}
 
 @BindingAdapter("bindMostChampions")
 fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions : List<ChampionSummary>) {

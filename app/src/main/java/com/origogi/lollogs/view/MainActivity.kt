@@ -3,11 +3,13 @@ package com.origogi.lollogs.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import com.origogi.lollogs.R
 import com.origogi.lollogs.databinding.ActivityMainBinding
+import com.origogi.lollogs.dpToPixel4
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,5 +37,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        dpToPixel4 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4f, resources.displayMetrics).toInt()
     }
 }
+
+

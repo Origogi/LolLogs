@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.origogi.lollogs.R
 import com.origogi.lollogs.loadImageCircleCrop
+import com.origogi.lollogs.loadImageRoundCorner
 import com.origogi.lollogs.model.ChampionSummary
+import com.origogi.lollogs.model.Item
 import com.origogi.lollogs.setTextPercent
 
 class ItemListView @JvmOverloads constructor(
@@ -20,11 +22,33 @@ class ItemListView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
 
-    init{
+    private val itemImages: List<ImageView>
+    private val trinketImage: ImageView
+
+    init {
         LayoutInflater.from(context).inflate(R.layout.custom_item_list, this, true)
+        itemImages = listOf(
+            findViewById(R.id.item0),
+            findViewById(R.id.item1),
+            findViewById(R.id.item2),
+            findViewById(R.id.item3),
+            findViewById(R.id.item4),
+            findViewById(R.id.item5),
+        )
+        trinketImage = findViewById(R.id.trinket)
     }
 
-    fun updateView(championSummary : List<ChampionSummary>) {
+    fun update(items: List<Item>) {
+        if (items.isEmpty()) {
+            return
+        }
 
+        if (items.size > 1) {
+            (0..items.size - 2).forEach {
+                loadImageRoundCorner(itemImages[it], items[it].imageUrl)
+            }
+        }
+
+        loadImageCircleCrop(trinketImage, items.last().imageUrl)
     }
 }

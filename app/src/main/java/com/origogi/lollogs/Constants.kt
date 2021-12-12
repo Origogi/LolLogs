@@ -9,3 +9,5 @@ val positionImageMap: Map<String, Int> = mapOf(
     "TOP" to R.drawable.ic_icon_lol_top,
     "SUP" to R.drawable.ic_icon_lol_sup,
 )
+
+var dpToPixel4 : Int = 0
