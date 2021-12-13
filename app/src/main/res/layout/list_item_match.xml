@@ -82,7 +82,7 @@
             setOPScoreBadge="@{game.stats.general.opScoreBadge}"
             android:layout_width="27dp"
             android:layout_height="16dp"
-            android:background="@drawable/rect_periwinkle"
+            tools:background="@drawable/rect_periwinkle"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/championImage"
             app:layout_constraintLeft_toLeftOf="@id/championImage"
@@ -107,7 +107,7 @@
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="2dp"
-            android:src="@mipmap/ic_launcher"
+            tools:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toRightOf="@id/championImage"
             app:layout_constraintTop_toBottomOf="@id/spell0" />
 
@@ -117,7 +117,7 @@
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
-            android:src="@mipmap/ic_launcher"
+            tools:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toRightOf="@id/spell0"
             app:layout_constraintTop_toTopOf="@id/spell0" />
 
@@ -227,7 +227,7 @@
             style="@style/TextStyle19"
             android:layout_width="65dp"
             android:layout_height="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="19dp"
             android:background="@drawable/rect_stroke_red"
             android:gravity="center"
             android:text="@{game.stats.general.largestMultiKillString}"
