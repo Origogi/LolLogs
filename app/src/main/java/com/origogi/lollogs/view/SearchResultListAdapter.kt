@@ -14,7 +14,10 @@ import com.origogi.lollogs.databinding.ListItemSummonerBinding
 import com.origogi.lollogs.model.*
 import kotlinx.coroutines.*
 
-class SearchResultListAdapter(private val doRefresh: () -> Unit, private val doLoadMore : () -> Unit) :
+class SearchResultListAdapter(
+    private val doRefresh: () -> Unit,
+    private val doLoadMore: () -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -23,7 +26,7 @@ class SearchResultListAdapter(private val doRefresh: () -> Unit, private val doL
         const val GAME_DATA = 2
     }
 
-    private val throttle = Throttle(500L)
+    private val throttle = Throttle(1000L)
 
     private var listItems: List<ListType> = emptyList()
 

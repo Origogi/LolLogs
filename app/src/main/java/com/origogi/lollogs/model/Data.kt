@@ -1,8 +1,8 @@
 package com.origogi.lollogs.model
 
 import com.origogi.lollogs.oneDay
+import com.origogi.lollogs.oneHour
 import com.origogi.lollogs.winsRate
-import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -112,13 +112,12 @@ data class GameData(
             val diffMills = currentMills - createGameMills
 
             return if (diffMills < oneDay) {
-                val minutes = ((diffMills / 1000) / 60) % (60)
-                val hours = ((diffMills / 1000) / (60 * 60)) % (24)
-
-                if (hours > 0) {
-                    "${hours}시간 전"
-                } else {
+                if (diffMills < oneHour) {
+                    val minutes = ((diffMills / 1000) / 60) % (60)
                     "${minutes}분 전"
+                } else {
+                    val hours = ((diffMills / 1000) / (60 * 60)) % (24)
+                    "${hours}시간 전"
                 }
             } else {
                 val formatter = SimpleDateFormat("yyyy.MM.dd");

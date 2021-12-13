@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.origogi.lollogs.TAG
 import com.origogi.lollogs.model.*
 import com.origogi.lollogs.winsRate
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchResultViewModel : ViewModel() {
@@ -26,12 +28,27 @@ class SearchResultViewModel : ViewModel() {
     val showLoadingInd: LiveData<Boolean>
         get() = _showLoadingInd
 
+    private val _errorMessage: MutableLiveData<String> = MutableLiveData<String>().apply { "" }
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+
     private var summonerName = ""
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Log.e(TAG, "$exception")
+
+        viewModelScope.launch {
+            _showLoadingInd.value = false
+            _errorMessage.value = exception.message
+            delay(1000)
+            _errorMessage.value = ""
+        }
+    }
 
 
     fun searchData(name: String) {
 
-        viewModelScope.launch {
+        viewModelScope.launch(handler) {
             summonerName = name
             _showLoadingInd.value = true
 
@@ -57,14 +74,15 @@ class SearchResultViewModel : ViewModel() {
     }
 
     fun loadMore() {
-        viewModelScope.launch {
+        viewModelScope.launch(handler) {
             val currentList = listItems.value ?: emptyList()
 
             if (currentList.isEmpty() || currentList.last() !is GameData) {
                 Log.e(TAG, "Match data is not exist")
             } else {
                 val lastGameCreateDate = (currentList.last() as GameData).createDate
-                val matchesResponse = RetrofitService.opggApi.loadMoreMatches(summonerName, lastGameCreateDate)
+                val matchesResponse =
+                    RetrofitService.opggApi.loadMoreMatches(summonerName, lastGameCreateDate)
                 _listItems.value = currentList + matchesResponse.games
             }
         }
