@@ -95,6 +95,8 @@ fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions: List<
 fun setTextPercent(textView: TextView, value: String) {
     if (value.startsWith("100")) {
         textView.setTextColor(ContextCompat.getColor(textView.context, R.color.darkish_pink))
+    } else {
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_grey))
     }
     textView.text = value
 }
