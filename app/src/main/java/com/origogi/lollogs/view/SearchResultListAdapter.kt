@@ -14,7 +14,8 @@ import com.origogi.lollogs.databinding.ListItemSummonerBinding
 import com.origogi.lollogs.model.*
 import java.lang.Exception
 
-class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchResultListAdapter(private val doRefresh: () -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val SUMMONER = 0
@@ -23,7 +24,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
 
-    private var listItems: List< ListType> = emptyList()
+    private var listItems: List<ListType> = emptyList()
 
     fun update(items: List<ListType>) {
         this.listItems = items
@@ -49,6 +50,9 @@ class SearchResultListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = LeagueListAdapter()
+                }
+                binding.refresh.setOnClickListener {
+                    doRefresh()
                 }
                 SummonerViewHolder(binding)
 

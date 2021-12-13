@@ -18,10 +18,18 @@ class SearchResultViewModel : ViewModel() {
     val listItems: LiveData<List<ListType>>
         get() = _listItems
 
+    private val _showLoadingInd : MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
+        false
+    }
+    val showLoadingInd : LiveData<Boolean>
+        get() = _showLoadingInd
+
 
     fun searchData(name: String) {
 
         viewModelScope.launch {
+
+            _showLoadingInd.value = true
 
             val summonerJob = async {
                 RetrofitService.opggApi.getSummoner(name)
@@ -39,6 +47,8 @@ class SearchResultViewModel : ViewModel() {
                 add(makeRecentGameSummaryData(matchesResponse))
                 addAll(matchesResponse.games)
             }
+
+            _showLoadingInd.value = false
         }
     }
 

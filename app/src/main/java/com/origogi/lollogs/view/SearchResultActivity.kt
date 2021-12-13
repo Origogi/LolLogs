@@ -21,13 +21,17 @@ class SearchResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
 
+        val summoner = intent.getStringExtra("summoner")!!
+        Log.d(TAG, "Summoner : $summoner")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_result)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-
         binding.recyclerView.apply {
-            adapter = SearchResultListAdapter()
+            adapter = SearchResultListAdapter() {
+                viewModel.searchData(summoner)
+            }
             layoutManager =
                 LinearLayoutManager(
                     this@SearchResultActivity,
@@ -35,9 +39,6 @@ class SearchResultActivity : AppCompatActivity() {
                     false
                 )
         }
-
-        val summoner = intent.getStringExtra("summoner")!!
-        Log.d(TAG, "Summoner : $summoner")
 
         viewModel.searchData(summoner)
     }

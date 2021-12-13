@@ -63,6 +63,7 @@
                 tools:text="Genetory" />
 
             <TextView
+                android:id="@+id/refresh"
                 style="@style/TextStyle3"
                 android:layout_width="89dp"
                 android:layout_height="36dp"
