@@ -121,7 +121,7 @@ data class GameData(
                     "${minutes}분 전"
                 }
             } else {
-                val formatter = SimpleDateFormat("yyyy:MM:dd");
+                val formatter = SimpleDateFormat("yyyy.MM.dd");
                 formatter.format(Date(createGameMills))
             }
 
