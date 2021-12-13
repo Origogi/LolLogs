@@ -1,20 +1,20 @@
 package com.origogi.lollogs.view
 
-import android.util.Log
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.origogi.lollogs.R
-import com.origogi.lollogs.TAG
 import com.origogi.lollogs.databinding.ListItemMatchBinding
 import com.origogi.lollogs.databinding.ListItemSummaryBinding
 import com.origogi.lollogs.databinding.ListItemSummonerBinding
 import com.origogi.lollogs.model.*
-import java.lang.Exception
+import kotlinx.coroutines.*
 
-class SearchResultListAdapter(private val doRefresh: () -> Unit) :
+class SearchResultListAdapter(private val doRefresh: () -> Unit, private val doLoadMore : () -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -23,12 +23,17 @@ class SearchResultListAdapter(private val doRefresh: () -> Unit) :
         const val GAME_DATA = 2
     }
 
+    private val throttle = Throttle(500L)
 
     private var listItems: List<ListType> = emptyList()
 
-    fun update(items: List<ListType>) {
-        this.listItems = items
-        notifyDataSetChanged()
+    fun update(newListItems: List<ListType>) {
+        val diffCallback = Diff(listItems, newListItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        listItems = newListItems
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -76,6 +81,12 @@ class SearchResultListAdapter(private val doRefresh: () -> Unit) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as Binder).bind(listItems[position])
+
+        if (position > itemCount - 10) {
+            throttle.launch {
+                doLoadMore()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -111,6 +122,62 @@ class SearchResultListAdapter(private val doRefresh: () -> Unit) :
         override fun bind(data: ListType) {
             binding.game = data as GameData
             binding.executePendingBindings()
+        }
+    }
+
+    private class Diff(
+        private val oldItems: List<ListType>,
+        private val newItems: List<ListType>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int =
+            oldItems.size
+
+        override fun getNewListSize(): Int =
+            newItems.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            if (oldItems[oldItemPosition] is Summoner && newItems[newItemPosition] is Summoner) {
+                return true
+            }
+
+            if (oldItems[oldItemPosition] is RecentGameSummaryData && newItems[newItemPosition] is RecentGameSummaryData) {
+                return true
+            }
+
+            if (oldItems[oldItemPosition] is GameData && newItems[newItemPosition] is GameData) {
+                return (oldItems[oldItemPosition] as GameData).gameId == (newItems[newItemPosition] as GameData).gameId
+            }
+            return false
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItems[oldItemPosition] == newItems[newItemPosition]
+        }
+    }
+
+
+    private class Throttle(
+        private val delayMs: Long,
+        private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+    ) {
+        private var job: Job? = null
+        private var nextMs: Long = 0
+        fun launch(func: () -> Unit) {
+            val current = SystemClock.uptimeMillis()
+            if (nextMs < current) {
+                nextMs = current + delayMs
+                func()
+                job?.cancel()
+            } else {
+                job?.cancel()
+                job = coroutineScope.launch {
+                    delay(nextMs - current)
+                    nextMs = SystemClock.uptimeMillis() + delayMs
+                    func()
+                }
+            }
+
         }
     }
 }

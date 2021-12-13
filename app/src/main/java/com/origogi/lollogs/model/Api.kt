@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface OPGGApi {
     @GET("summoner/{summoner}")
@@ -17,6 +18,12 @@ interface OPGGApi {
     @GET("summoner/{summoner}/matches")
     suspend fun getMatches(
         @Path("summoner") name: String,
+    ): MatchesResponse
+
+    @GET("summoner/{summoner}/matches")
+    suspend fun loadMoreMatches(
+        @Path("summoner") name: String,
+        @Query("lastMatch") lastCreateDate : Long
     ): MatchesResponse
 }
 

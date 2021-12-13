@@ -29,9 +29,11 @@ class SearchResultActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         binding.recyclerView.apply {
-            adapter = SearchResultListAdapter() {
+            adapter = SearchResultListAdapter({
                 viewModel.searchData(summoner)
-            }
+            }, {
+                viewModel.loadMore()
+            })
             layoutManager =
                 LinearLayoutManager(
                     this@SearchResultActivity,
