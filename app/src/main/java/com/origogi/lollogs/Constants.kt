@@ -10,4 +10,12 @@ val positionImageMap: Map<String, Int> = mapOf(
     "SUP" to R.drawable.ic_icon_lol_sup,
 )
 
-var dpToPixel4 : Int = 0
+val opBadgeBackground: Map<String, Int> = mapOf(
+    "ACE" to R.drawable.rect_periwinkle,
+    "MVP" to R.drawable.rect_yellow
+)
+
+var dpToPixel4: Int = 0
+
+val oneDay = 24 * 60 * 60 * 1000
+val oneHour = 60 * 60 * 1000

@@ -3,6 +3,10 @@
 
     <data>
 
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
         <variable
             name="game"
             type="com.origogi.lollogs.model.GameData" />
@@ -51,6 +55,7 @@
             tools:text="승" />
 
         <TextView
+            android:text="@{game.gameLengthToMMSSString}"
             android:id="@+id/gameDate"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -75,6 +80,7 @@
 
         <TextView
             style="@style/TextStyle14"
+            setOPScoreBadge="@{game.stats.general.opScoreBadge}"
             android:layout_width="27dp"
             android:layout_height="16dp"
             android:background="@drawable/rect_periwinkle"
@@ -128,10 +134,10 @@
             app:layout_constraintTop_toBottomOf="@id/rune0" />
 
         <com.origogi.lollogs.view.customviews.ItemListView
+            loadItemImages="@{game.items}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            loadItemImages="@{game.items}"
 
             app:layout_constraintLeft_toLeftOf="@id/championImage"
             app:layout_constraintTop_toBottomOf="@id/championImage" />
@@ -142,12 +148,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:text="@{game.stats.general.kill + ``}"
             app:layout_constraintLeft_toRightOf="@id/rune0"
             app:layout_constraintTop_toTopOf="@id/championImage"
             tools:text="5" />
 
         <TextView
-
             android:id="@+id/slash0"
             style="@style/TextStyle15"
             android:layout_width="wrap_content"
@@ -159,10 +165,10 @@
 
         <TextView
             android:id="@+id/death"
-
             style="@style/TextStyle21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{game.stats.general.death + ``}"
             app:layout_constraintLeft_toRightOf="@id/slash0"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="5" />
@@ -182,20 +188,33 @@
             style="@style/TextStyle15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{game.stats.general.assists + ``}"
             app:layout_constraintLeft_toRightOf="@id/slash1"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="14" />
+
+        <TextView
+            android:text="@{`킬관여 ` + game.stats.general.contributionForKillRate}"
+            style="@style/TextStyle16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintLeft_toLeftOf="@id/kill"
+            app:layout_constraintTop_toBottomOf="@id/kill"
+            tools:text="킬관여 13%" />
 
         <TextView
             android:id="@+id/gameType"
             style="@style/TextStyle17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{game.gameType}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/championImage"
             tools:text="솔랭" />
 
         <TextView
+            android:text="@{game.beforeGameTimeString}"
             android:id="@+id/beforeTime"
             style="@style/TextStyle18"
             android:layout_width="wrap_content"
@@ -212,6 +231,8 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/rect_stroke_red"
             android:gravity="center"
+            android:text="@{game.stats.general.largestMultiKillString}"
+            android:visibility="@{TextUtils.isEmpty(game.stats.general.largestMultiKillString )? View.GONE : View.VISIBLE}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/beforeTime"
             tools:text="Quadra Kill" />

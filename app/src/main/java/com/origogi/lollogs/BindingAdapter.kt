@@ -34,7 +34,7 @@ fun loadPositionImage(imageView: ImageView, position: String) {
 }
 
 @BindingAdapter("loadItemImages")
-fun loadItemImages(itemListView: ItemListView, items : List<Item>) {
+fun loadItemImages(itemListView: ItemListView, items: List<Item>) {
     itemListView.update(items)
 }
 
@@ -43,7 +43,7 @@ fun loadImageRoundCorner(imageView: ImageView, imageUrl: String) {
     Glide.with(imageView.context)
         .load(imageUrl)
         .transition(DrawableTransitionOptions.withCrossFade())
-        .transform( RoundedCorners(dpToPixel4))
+        .transform(RoundedCorners(dpToPixel4))
         .into(imageView)
 }
 
@@ -76,17 +76,22 @@ fun bindSummoner(recyclerView: RecyclerView, items: LiveData<List<ListType>>) {
 
 
 @BindingAdapter("setWinOrLoseColor")
-fun setWinOrLoseColor(view: View, win : Boolean) {
-    view.setBackgroundColor(ContextCompat.getColor(view.context, if (win) R.color.soft_blue else R.color.darkish_pink ))
+fun setWinOrLoseColor(view: View, win: Boolean) {
+    view.setBackgroundColor(
+        ContextCompat.getColor(
+            view.context,
+            if (win) R.color.soft_blue else R.color.darkish_pink
+        )
+    )
 }
 
 @BindingAdapter("bindMostChampions")
-fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions : List<ChampionSummary>) {
+fun bindMostChampions(mostChampionsView: MostChampionsView, mostChampions: List<ChampionSummary>) {
     mostChampionsView.updateView(mostChampions)
 }
 
 @BindingAdapter("setTextPercent")
-fun setTextPercent(textView: TextView, value : String) {
+fun setTextPercent(textView: TextView, value: String) {
     if (value.startsWith("100")) {
         textView.setTextColor(ContextCompat.getColor(textView.context, R.color.darkish_pink))
     }
@@ -94,7 +99,19 @@ fun setTextPercent(textView: TextView, value : String) {
 }
 
 
+@BindingAdapter("setOPScoreBadge")
+fun setOPScoreBadge(textView: TextView, opScore: String) {
+    if (opScore.isEmpty()) {
+        textView.visibility = View.GONE
+        return
+    }
+    textView.visibility = View.VISIBLE
 
+    textView.text = opScore
+    opBadgeBackground[opScore]?.let { bg ->
+        textView.background = textView.context.getDrawable(bg)
+    }
+}
 
 
 

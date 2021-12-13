@@ -1,7 +1,11 @@
 package com.origogi.lollogs.model
 
+import com.origogi.lollogs.oneDay
 import com.origogi.lollogs.winsRate
+import java.text.DateFormat
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 data class SummonerResponse(
     var summoner: Summoner? = null
@@ -59,8 +63,8 @@ data class Summary(
     val avgAssistString: String
         get() = String.format("%.1f", assists / 20.0)
 
-    val kdaString : String
-        get() =String.format("%.1f", (kills + assists) / Math.max(1, deaths).toDouble())
+    val kdaString: String
+        get() = String.format("%.1f", (kills + assists) / Math.max(1, deaths).toDouble())
 
     val winAndLossString: String
         get() = "${wins}승 ${losses}패"
@@ -75,9 +79,7 @@ data class RecentGameSummaryData(
     val mostChampions: List<ChampionSummary>,
     val summary: Summary,
     val position: Position
-) : ListType() {
-
-}
+) : ListType()
 
 data class GameData(
     var mmr: Int = 0,
@@ -96,7 +98,35 @@ data class GameData(
     var peak: List<String> = emptyList(),
     var isWin: Boolean = false
 
-) : ListType()
+) : ListType() {
+
+    val gameLengthToMMSSString: String
+        get() = "${(gameLength / 60).toString().padStart(2, '0')}:${
+            (gameLength % 60).toString().padStart(2, '0')
+        }"
+
+    val beforeGameTimeString: String
+        get() {
+            val createGameMills = createDate * 1000
+            val currentMills = System.currentTimeMillis()
+            val diffMills = currentMills - createGameMills
+
+            return if (diffMills < oneDay) {
+                val minutes = ((diffMills / 1000) / 60) % (60)
+                val hours = ((diffMills / 1000) / (60 * 60)) % (24)
+
+                if (hours > 0) {
+                    "${hours}시간 전"
+                } else {
+                    "${minutes}분 전"
+                }
+            } else {
+                val formatter = SimpleDateFormat("yyyy:MM:dd");
+                formatter.format(Date(createGameMills))
+            }
+
+        }
+}
 
 data class Stats(
     var general: General = General(),
