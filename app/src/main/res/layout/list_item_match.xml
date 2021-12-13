@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="game"
-            type="com.origogi.lollogs.model.GameData" />
+            name="gameMatch"
+            type="com.origogi.lollogs.model.GameMatch" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +23,7 @@
 
         <FrameLayout
             android:id="@+id/winLossPanel"
-            setWinOrLoseColor="@{game.win}"
+            setWinOrLoseColor="@{gameMatch.win}"
             android:layout_width="40dp"
             android:layout_height="104dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,14 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:text="@{game.win ? `승` : `패`}"
+            android:text="@{gameMatch.win ? `승` : `패`}"
             app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintLeft_toLeftOf="@id/winLossPanel"
             app:layout_constraintRight_toRightOf="@id/winLossPanel"
             tools:text="승" />
 
         <TextView
-            android:text="@{game.gameLengthToMMSSString}"
+            android:text="@{gameMatch.gameLengthToMMSSString}"
             android:id="@+id/gameDate"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
 
         <ImageView
             android:id="@+id/championImage"
-            loadImageCircleCrop="@{game.champion.imageUrl}"
+            loadImageCircleCrop="@{gameMatch.champion.imageUrl}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
@@ -79,7 +79,7 @@
 
         <TextView
             style="@style/TextStyle14"
-            setOPScoreBadge="@{game.stats.general.opScoreBadge}"
+            setOPScoreBadge="@{gameMatch.stats.general.opScoreBadge}"
             android:layout_width="27dp"
             android:layout_height="16dp"
             tools:background="@drawable/rect_periwinkle"
@@ -92,7 +92,7 @@
 
         <ImageView
             android:id="@+id/spell0"
-            loadImageRoundCorner="@{game.spells.get(0).imageUrl}"
+            loadImageRoundCorner="@{gameMatch.spells.get(0).imageUrl}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -102,7 +102,7 @@
 
         <ImageView
             android:id="@+id/spell1"
-            loadImageRoundCorner="@{game.spells.get(1).imageUrl}"
+            loadImageRoundCorner="@{gameMatch.spells.get(1).imageUrl}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -113,7 +113,7 @@
 
         <ImageView
             android:id="@+id/rune0"
-            loadImageCircleCrop="@{game.peak.get(0)}"
+            loadImageCircleCrop="@{gameMatch.peak.get(0)}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -123,7 +123,7 @@
 
         <ImageView
             android:id="@+id/rune1"
-            loadImageCircleCrop="@{game.peak.get(1)}"
+            loadImageCircleCrop="@{gameMatch.peak.get(1)}"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginLeft="4dp"
@@ -133,7 +133,7 @@
             app:layout_constraintTop_toBottomOf="@id/rune0" />
 
         <com.origogi.lollogs.view.customviews.ItemListView
-            loadItemImages="@{game.items}"
+            loadItemImages="@{gameMatch.items}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="@{game.stats.general.kill + ``}"
+            android:text="@{gameMatch.stats.general.kill + ``}"
             app:layout_constraintLeft_toRightOf="@id/rune0"
             app:layout_constraintTop_toTopOf="@id/championImage"
             tools:text="5" />
@@ -167,7 +167,7 @@
             style="@style/TextStyle21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{game.stats.general.death + ``}"
+            android:text="@{gameMatch.stats.general.death + ``}"
             app:layout_constraintLeft_toRightOf="@id/slash0"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="5" />
@@ -187,13 +187,13 @@
             style="@style/TextStyle15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{game.stats.general.assists + ``}"
+            android:text="@{gameMatch.stats.general.assists + ``}"
             app:layout_constraintLeft_toRightOf="@id/slash1"
             app:layout_constraintTop_toTopOf="@id/kill"
             tools:text="14" />
 
         <TextView
-            android:text="@{`킬관여 ` + game.stats.general.contributionForKillRate}"
+            android:text="@{`킬관여 ` + gameMatch.stats.general.contributionForKillRate}"
             style="@style/TextStyle16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,13 +207,13 @@
             style="@style/TextStyle17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{game.gameType}"
+            android:text="@{gameMatch.gameType}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/championImage"
             tools:text="솔랭" />
 
         <TextView
-            android:text="@{game.beforeGameTimeString}"
+            android:text="@{gameMatch.beforeGameTimeString}"
             android:id="@+id/beforeTime"
             style="@style/TextStyle18"
             android:layout_width="wrap_content"
@@ -230,8 +230,8 @@
             android:layout_marginTop="19dp"
             android:background="@drawable/rect_stroke_red"
             android:gravity="center"
-            android:text="@{game.stats.general.largestMultiKillString}"
-            android:visibility="@{TextUtils.isEmpty(game.stats.general.largestMultiKillString )? View.GONE : View.VISIBLE}"
+            android:text="@{gameMatch.stats.general.largestMultiKillString}"
+            android:visibility="@{TextUtils.isEmpty(gameMatch.stats.general.largestMultiKillString )? View.GONE : View.VISIBLE}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/beforeTime"
             tools:text="Quadra Kill" />

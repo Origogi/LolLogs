@@ -123,7 +123,7 @@ class SearchResultListAdapter(
         RecyclerView.ViewHolder(binding.root), Binder {
 
         override fun bind(data: ListType) {
-            binding.game = data as GameData
+            binding.gameMatch = data as GameMatch
             binding.executePendingBindings()
         }
     }
@@ -148,8 +148,8 @@ class SearchResultListAdapter(
                 return true
             }
 
-            if (oldItems[oldItemPosition] is GameData && newItems[newItemPosition] is GameData) {
-                return (oldItems[oldItemPosition] as GameData).gameId == (newItems[newItemPosition] as GameData).gameId
+            if (oldItems[oldItemPosition] is GameMatch && newItems[newItemPosition] is GameMatch) {
+                return (oldItems[oldItemPosition] as GameMatch).gameId == (newItems[newItemPosition] as GameMatch).gameId
             }
             return false
         }

@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.origogi.lollogs.R
 import com.origogi.lollogs.TAG
 import com.origogi.lollogs.databinding.ActivitySearchResultBinding

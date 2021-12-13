@@ -17,5 +17,5 @@ val opBadgeBackground: Map<String, Int> = mapOf(
 
 var dpToPixel4: Int = 0
 
-val oneDay = 24 * 60 * 60 * 1000
-val oneHour = 60 * 60 * 1000
+const val ONE_DAY = 24 * 60 * 60 * 1000
+const val ONE_HOUR = 60 * 60 * 1000

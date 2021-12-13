@@ -1,35 +1,35 @@
 package com.origogi.lollogs.model
 
-import com.origogi.lollogs.oneDay
-import com.origogi.lollogs.oneHour
+import com.origogi.lollogs.ONE_DAY
+import com.origogi.lollogs.ONE_HOUR
 import com.origogi.lollogs.winsRate
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.max
 
 data class SummonerResponse(
-    var summoner: Summoner? = null
+    val summoner: Summoner = Summoner()
 )
 
 data class MatchesResponse(
-    var champions: List<ChampionSummary> = emptyList(),
-    var games: List<GameData> = emptyList(),
-    var positions: List<Position> = emptyList(),
-    var summary: Summary = Summary()
-
+    val champions: List<ChampionSummary> = emptyList(),
+    val games: List<GameMatch> = emptyList(),
+    val positions: List<Position> = emptyList(),
+    val summary: Summary = Summary()
 )
 
 data class ChampionSummary(
-    var id: Int = 0,
-    var key: String = "",
-    var name: String = "",
-    var imageUrl: String = "",
-    var games: Int = 0,
-    var kills: Int = 0,
-    var deaths: Int = 0,
-    var assists: Int = 0,
-    var wins: Int = 0,
-    var losses: Int = 0,
+    val id: Int = 0,
+    val key: String = "",
+    val name: String = "",
+    val imageUrl: String = "",
+    val games: Int = 0,
+    val kills: Int = 0,
+    val deaths: Int = 0,
+    val assists: Int = 0,
+    val wins: Int = 0,
+    val losses: Int = 0,
 ) {
     val winsRateString: String
         get() = "${(wins to losses).winsRate}%"
@@ -37,24 +37,22 @@ data class ChampionSummary(
 
 
 data class Position(
-    var games: Int = 0,
-    var wins: Int = 0,
-    var losses: Int = 0,
-    var position: String = "",
-    var positionName: String = ""
+    val games: Int = 0,
+    val wins: Int = 0,
+    val losses: Int = 0,
+    val position: String = "",
+    val positionName: String = ""
 ) {
     val winsRateString: String
         get() = "${(wins to losses).winsRate}%"
 }
 
 data class Summary(
-    var wins: Int = 0,
-    var losses: Int = 0,
-    var kills: Int = 0,
-    var deaths: Int = 0,
-    var assists: Int = 0,
-
-
+    val wins: Int = 0,
+    val losses: Int = 0,
+    val kills: Int = 0,
+    val deaths: Int = 0,
+    val assists: Int = 0,
     ) {
     val avgKillString: String
         get() = String.format("%.1f", kills / 20.0)
@@ -64,7 +62,7 @@ data class Summary(
         get() = String.format("%.1f", assists / 20.0)
 
     val kdaString: String
-        get() = String.format("%.1f", (kills + assists) / Math.max(1, deaths).toDouble())
+        get() = String.format("%.1f", (kills + assists) / max(1, deaths).toDouble())
 
     val winAndLossString: String
         get() = "${wins}승 ${losses}패"
@@ -81,22 +79,22 @@ data class RecentGameSummaryData(
     val position: Position
 ) : ListType()
 
-data class GameData(
-    var mmr: Int = 0,
-    var champion: Champion,
-    var spells: List<Spell> = emptyList(),
-    var items: List<Item> = emptyList(),
-    var needRenew: Boolean = false,
-    var gameId: String = "",
-    var createDate: Long = 0L,
-    var gameLength: Long = 0L,
-    var gameType: String = "",
-    var summonerId: String = "",
-    var summonerName: String = "",
-    var tierRankShort: String = "",
-    var stats: Stats = Stats(),
-    var peak: List<String> = emptyList(),
-    var isWin: Boolean = false
+data class GameMatch(
+    val mmr: Int = 0,
+    val champion: Champion = Champion(),
+    val spells: List<Spell> = emptyList(),
+    val items: List<Item> = emptyList(),
+    val needRenew: Boolean = false,
+    val gameId: String = "",
+    val createDate: Long = 0L,
+    val gameLength: Long = 0L,
+    val gameType: String = "",
+    val summonerId: String = "",
+    val summonerName: String = "",
+    val tierRankShort: String = "",
+    val stats: Stats = Stats(),
+    val peak: List<String> = emptyList(),
+    val isWin: Boolean = false
 
 ) : ListType() {
 
@@ -111,8 +109,8 @@ data class GameData(
             val currentMills = System.currentTimeMillis()
             val diffMills = currentMills - createGameMills
 
-            return if (diffMills < oneDay) {
-                if (diffMills < oneHour) {
+            return if (diffMills < ONE_DAY) {
+                if (diffMills < ONE_HOUR) {
                     val minutes = ((diffMills / 1000) / 60) % (60)
                     "${minutes}분 전"
                 } else {
@@ -120,61 +118,62 @@ data class GameData(
                     "${hours}시간 전"
                 }
             } else {
-                val formatter = SimpleDateFormat("yyyy.MM.dd");
+                val formatter = SimpleDateFormat("yyyy.MM.dd")
                 formatter.format(Date(createGameMills))
             }
-
         }
 }
 
+data class Summoner(
+    val name: String = "",
+    val level: Int = 0,
+    val profileImageUrl: String = "",
+    val profileBorderImageUrl: String = "",
+    val url: String = "",
+    val leagues: List<League> = emptyList(),
+    val ladderRank: LadderRank = LadderRank(),
+    val profileBackgroundImageUrl: String = ""
+) : ListType()
+
+
 data class Stats(
-    var general: General = General(),
+    val general: General = General(),
 //    var ward : Ward = Ward(),
 )
 
 data class General(
-    var kill: Int = 0,
-    var death: Int = 0,
-    var assists: Int = 0,
-    var kdaString: String = "",
-    var cs: Int = 0,
-    var csPerMin: Double = 0.0,
-    var contributionForKillRate: String = "",
-    var goldEarned: Int = 0,
-    var totalDamageDealtToChampions: Int = 0,
-    var largestMultiKillString: String = "",
-    var opScoreBadge: String = ""
+    val kill: Int = 0,
+    val death: Int = 0,
+    val assists: Int = 0,
+    val kdaString: String = "",
+    val cs: Int = 0,
+    val csPerMin: Double = 0.0,
+    val contributionForKillRate: String = "",
+    val goldEarned: Int = 0,
+    val totalDamageDealtToChampions: Int = 0,
+    val largestMultiKillString: String = "",
+    val opScoreBadge: String = ""
 )
 
 data class Champion(
-    var imageUrl: String = "",
-    var level: Int = 0,
+    val imageUrl: String = "",
+    val level: Int = 0,
 )
 
 data class Item(
-    var imageUrl: String = ""
+    val imageUrl: String = ""
 )
 
 data class Spell(
-    var imageUrl: String = ""
+    val imageUrl: String = ""
 )
 
-data class Summoner(
-    var name: String = "",
-    var level: Int = 0,
-    var profileImageUrl: String = "",
-    var profileBorderImageUrl: String = "",
-    var url: String = "",
-    var leagues: List<League> = emptyList(),
-    var ladderRank: LadderRank = LadderRank(),
-    var profileBackgroundImageUrl: String = ""
-) : ListType()
 
 data class League(
-    var hasResults: Boolean = false,
-    var wins: Int = 0,
-    var losses: Int = 0,
-    var tierRank: Tier = Tier()
+    val hasResults: Boolean = false,
+    val wins: Int = 0,
+    val losses: Int = 0,
+    val tierRank: Tier = Tier()
 ) {
 
     val winsRate: String
@@ -185,15 +184,15 @@ data class League(
 }
 
 data class Tier(
-    var name: String = "",
-    var tier: String = "",
-    var string: String = "",
-    var shortString: String = "",
-    var division: String = "",
-    var imageUrl: String = "",
-    var lp: Int = 0,
-    var tierRankPoint: Int = 0,
-    var season: Int = 0
+    val name: String = "",
+    val tier: String = "",
+    val string: String = "",
+    val shortString: String = "",
+    val division: String = "",
+    val imageUrl: String = "",
+    val lp: Int = 0,
+    val tierRankPoint: Int = 0,
+    val season: Int = 0
 
 ) {
     val lpStrFormat: String
@@ -210,6 +209,6 @@ data class Tier(
 }
 
 data class LadderRank(
-    var rank: Int = 0,
-    var rankPercentOfTop: Int = 0
+    val rank: Int = 0,
+    val rankPercentOfTop: Int = 0
 )

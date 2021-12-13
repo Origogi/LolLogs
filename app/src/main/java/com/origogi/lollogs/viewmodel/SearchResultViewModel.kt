@@ -22,13 +22,11 @@ class SearchResultViewModel : ViewModel() {
     val listItems: LiveData<List<ListType>>
         get() = _listItems
 
-    private val _showLoadingInd: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
-        false
-    }
+    private val _showLoadingInd: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val showLoadingInd: LiveData<Boolean>
         get() = _showLoadingInd
 
-    private val _errorMessage: MutableLiveData<String> = MutableLiveData<String>().apply { "" }
+    private val _errorMessage: MutableLiveData<String> = MutableLiveData<String>()
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
@@ -64,7 +62,7 @@ class SearchResultViewModel : ViewModel() {
             val matchesResponse = matchesJob.await()
 
             _listItems.value = mutableListOf<ListType>().apply {
-                summonerResponse.summoner?.let { add(it) }
+                add(summonerResponse.summoner)
                 add(makeRecentGameSummaryData(matchesResponse))
                 addAll(matchesResponse.games)
             }
@@ -77,10 +75,10 @@ class SearchResultViewModel : ViewModel() {
         viewModelScope.launch(handler) {
             val currentList = listItems.value ?: emptyList()
 
-            if (currentList.isEmpty() || currentList.last() !is GameData) {
+            if (currentList.isEmpty() || currentList.last() !is GameMatch) {
                 Log.e(TAG, "Match data is not exist")
             } else {
-                val lastGameCreateDate = (currentList.last() as GameData).createDate
+                val lastGameCreateDate = (currentList.last() as GameMatch).createDate
                 val matchesResponse =
                     RetrofitService.opggApi.loadMoreMatches(summonerName, lastGameCreateDate)
                 _listItems.value = currentList + matchesResponse.games

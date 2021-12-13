@@ -3,6 +3,7 @@ package com.origogi.lollogs
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
@@ -109,7 +110,7 @@ fun setOPScoreBadge(textView: TextView, opScore: String) {
 
     textView.text = opScore
     opBadgeBackground[opScore]?.let { bg ->
-        textView.background = textView.context.getDrawable(bg)
+        textView.background = AppCompatResources.getDrawable(textView.context, bg)
     }
 }
 
