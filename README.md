@@ -1,4 +1,7 @@
-# LolLogs
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/35194820/145919630-06df7b4e-45ec-44a1-b65f-bef47f8ce5fb.PNG">
+</a>
+</div>
 
 ## Screen shot
 
